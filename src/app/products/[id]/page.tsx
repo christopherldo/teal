@@ -59,7 +59,7 @@ export default async function ProductPage({
         priority
       />
 
-      <div>
+      <div className="flex flex-col justify-center lg:min-h-[calc(100vh-66.5px-228px-16px)]">
         <h1 className="text-5xl font-bold">{product.name}</h1>
         <PriceTag price={product.price} className="mt-4" />
         <p className="py-6">{product.description}</p>

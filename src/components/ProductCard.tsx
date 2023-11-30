@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           src={product.imageUrl}
           alt={product.name}
           width={800}
-          height={400}
+          height={192}
           className="h-48 object-cover"
         />
       </figure>
