@@ -7,6 +7,7 @@ import ShoppingCartButton from "./ShoppingCartButton";
 import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getAllowedUsers } from "../api/auth/allowedUsers";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -20,6 +21,12 @@ async function searchProducts(formData: FormData) {
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
+  const allowedUsers = await getAllowedUsers();
+
+  const userEmail = session?.user.email ?? "";
+
+  const isAllowedToCreate = allowedUsers.includes(userEmail);
+
   const cart = await getCart();
 
   return (
@@ -45,7 +52,10 @@ export default async function Navbar() {
           </form>
 
           <ShoppingCartButton cart={cart} />
-          <UserMenuButton session={session} />
+          <UserMenuButton
+            session={session}
+            isAllowedToCreate={isAllowedToCreate}
+          />
         </div>
       </div>
     </div>

@@ -8,13 +8,17 @@ import Link from "next/link";
 
 interface UserMenuButtonProps {
   session: Session | null;
+  isAllowedToCreate: Boolean;
 }
 
-export default function UserMenuButton({ session }: UserMenuButtonProps) {
+export default function UserMenuButton({
+  session,
+  isAllowedToCreate,
+}: UserMenuButtonProps) {
   const user = session?.user;
 
   return (
-    <div className="dropdown-end dropdown">
+    <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-circle btn-ghost">
         {user ? (
           <Image
@@ -47,9 +51,11 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
         <li>
           {user ? (
             <>
-              <Link href="/add-product">
-                <button>Add Product</button>
-              </Link>
+              {isAllowedToCreate && (
+                <Link href="/add-product">
+                  <button>Add Product</button>
+                </Link>
+              )}
               <button onClick={() => signOut({ callbackUrl: "/" })}>
                 Sign Out
               </button>

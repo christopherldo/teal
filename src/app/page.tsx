@@ -57,7 +57,7 @@ export default async function Home({
         </div>
       )}
 
-      <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="my-4 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {(currentPage === 1 ? products.slice(1) : products).map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
